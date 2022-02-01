@@ -7,46 +7,64 @@ i kwota raty były pobierane ze standardowego wejścia (terminal).
 Przykładowe wartości kredytu i formułę do jego wyliczenia znajdziesz w załączniku powyżej.
 Skopiuj z niego wartości inflacji dla każdego miesiąca."""
 
-import math
+from termcolor import colored
 
-credit = 1000000        # potem zmiecić na input
-period = 20*12          # potem zmiecić na input
-credit_value = 5000     # potem zmiecić na input
-interest_rate = 0.015
+credit = 12000
+loan_installment = 200
+interest_rate = 0.03
+# credit = int(input("Podaj wysokość kredytu: "))
+# loan_installment = int(input("Podaj wysokość raty miesięcznej: "))
+# interest_rate = float(input("Podaj oprocentowanie kredytu(np. 0.05): "))
 
-inflation = [1.592824484,
-            -0.453509101,
-            2.324671717,
-            1.261254407,
-            1.782526286,
-            2.329384541,
-            1.502229842,
-            1.782526286,
-            2.328848994,
-            0.616921348,
-            2.352295886,
-            0.337779545,
-            1.577035247,
-            -0.292781443,
-            2.48619659,
-            0.267110318,
-            1.417952672,
-            1.054243267,
-            1.480520104,
-            1.577035247,
-            -0.07742069,
-            1.165733399,
-            -0.404186718,
-            1.499708521]
+# inflation = [1.592824484,
+#             -0.453509101,
+#             2.324671717,
+#             1.261254407,
+#             1.782526286,
+#             2.329384541,
+#             1.502229842,
+#             1.782526286,
+#             2.328848994,
+#             0.616921348,
+#             2.352295886,
+#             0.337779545,
+#             1.577035247,
+#             -0.292781443,
+#             2.48619659,
+#             0.267110318,
+#             1.417952672,
+#             1.054243267,
+#             1.480520104,
+#             1.577035247,
+#             -0.07742069,
+#             1.165733399,
+#             -0.404186718,
+#             1.499708521]
 
-for i in range(len(inflation)):
-    credit_new_value = (1 + (inflation[i]/100 + interest_rate)/(20*12)) * credit - 5000
-    difference_value = credit - credit_new_value
-    credit = credit_new_value
-    print("{:0.2f}".format(difference_value))
-    print(f"rata numer {i+1}")
-    print(f"Twoja pozostała kwota kredytu to {(round(credit_new_value, 2))}, to {difference_value:.2f} mniej niż w poprzednim miesiącu.")
-    print()
+# def printing_calculation():
+#     import_data()
+#     calculation()
+
+def import_data():
+    file = open("inflation.txt", "r")
+    inflation1 = [i for i in file.readlines()]
+    inflation2 = []
+    for j in inflation1:
+        inflation2.append(float((j.replace(",\n", ""))))
+    print(inflation2)
+# jak zwrócić listę ???
+# return zwraca tylko jeden element z listy
+
+def calculation():
+    for i in range(len(inflation2):
+        credit_new_value = (1 + (inflation2[i] / 100 + interest_rate)/(12)) * credit - loan_installment  # obliczanie nowej wartości kredytu po racie
+        difference_value = credit - credit_new_value                                                    # obliczanie różnicy między starą wartością kredytu a nową
+        credit = credit_new_value
+
+        print(colored(f"rata numer {i+1}", "yellow"))
+        print(f"Twoja pozostała kwota kredytu to {(round(credit_new_value, 2))} PLN, to {difference_value:.2f} PLN mniej niż w poprzednim miesiącu.")
+        print(colored(("-" * 100), "blue"))
+    print("")
 
 
 
