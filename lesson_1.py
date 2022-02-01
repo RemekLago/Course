@@ -9,12 +9,32 @@ Skopiuj z niego wartości inflacji dla każdego miesiąca."""
 
 from termcolor import colored
 
-credit = 12000
-loan_installment = 200
-interest_rate = 0.03
-# credit = int(input("Podaj wysokość kredytu: "))
-# loan_installment = int(input("Podaj wysokość raty miesięcznej: "))
-# interest_rate = float(input("Podaj oprocentowanie kredytu(np. 0.05): "))
+credit = int(input("Podaj wysokość kredytu: "))
+loan_installment = int(input("Podaj wysokość raty miesięcznej: "))
+interest_rate = float(input("Podaj oprocentowanie kredytu(np. 0.05): "))
+
+
+# pobieranie danych o inflacji z pliku inflation.txt
+def import_data():
+    with open("inflation.txt") as file:
+        inflation1 = [float((i.replace(",\n", ""))) for i in file.readlines()]
+    return inflation1
+
+
+def calculation(credit1, loan_installment2, interest_rate1):
+    inflation2 = import_data()
+    for i in range(len(inflation2)):
+        credit_new_value = (1 + (inflation2[i] / 100 + interest_rate1)/(12)) * credit1 - loan_installment2  # obliczanie nowej wartości kredytu po racie
+        difference_value = credit1 - credit_new_value                                                    # obliczanie różnicy między starą wartością kredytu a nową
+        credit1 = credit_new_value
+
+        print(colored(f"rata numer {i+1}", "yellow"))
+        print(f"Twoja pozostała kwota kredytu to {(round(credit_new_value, 2))} PLN, to {difference_value:.2f} PLN mniej niż w poprzednim miesiącu.")
+        print(colored(("-" * 100), "blue"))
+    print("")
+
+
+calculation(credit, loan_installment, interest_rate)
 
 # inflation = [1.592824484,
 #             -0.453509101,
@@ -40,32 +60,5 @@ interest_rate = 0.03
 #             1.165733399,
 #             -0.404186718,
 #             1.499708521]
-
-# def printing_calculation():
-#     import_data()
-#     calculation()
-
-def import_data():
-    file = open("inflation.txt", "r")
-    inflation1 = [i for i in file.readlines()]
-    inflation2 = []
-    for j in inflation1:
-        inflation2.append(float((j.replace(",\n", ""))))
-    print(inflation2)
-# jak zwrócić listę ???
-# return zwraca tylko jeden element z listy
-
-def calculation():
-    for i in range(len(inflation2):
-        credit_new_value = (1 + (inflation2[i] / 100 + interest_rate)/(12)) * credit - loan_installment  # obliczanie nowej wartości kredytu po racie
-        difference_value = credit - credit_new_value                                                    # obliczanie różnicy między starą wartością kredytu a nową
-        credit = credit_new_value
-
-        print(colored(f"rata numer {i+1}", "yellow"))
-        print(f"Twoja pozostała kwota kredytu to {(round(credit_new_value, 2))} PLN, to {difference_value:.2f} PLN mniej niż w poprzednim miesiącu.")
-        print(colored(("-" * 100), "blue"))
-    print("")
-
-
 
 
