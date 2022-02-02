@@ -9,6 +9,7 @@ Skopiuj z niego wartości inflacji dla każdego miesiąca."""
 
 from termcolor import colored
 
+
 credit = int(input("Podaj wysokość kredytu: "))
 loan_installment = int(input("Podaj wysokość raty miesięcznej: "))
 interest_rate = float(input("Podaj oprocentowanie kredytu(np. 0.05): "))
