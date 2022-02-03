@@ -27,11 +27,11 @@ def calculation(credit1, loan_installment2, interest_rate1):
     inflation2 = import_data()
 #   for i in range(len(inflation2)):
     for idx, value in enumerate(inflation2):
-        credit_new_value = (1 + (inflation2[idx] / 100 + interest_rate1)/(12)) * credit1 - loan_installment2  # obliczanie nowej wartości kredytu po racie
+        credit_new_value = ((1 + value / 100 + interest_rate1)/(12)) * credit1 - loan_installment2  # obliczanie nowej wartości kredytu po racie
         difference_value = credit1 - credit_new_value                                                    # obliczanie różnicy między starą wartością kredytu a nową
         credit1 = credit_new_value
 
-        print(colored(f"rata numer {idx+1}. Inflacja jest na poziomie: {inflation2[idx]:.4}% ", "yellow"))
+        print(colored(f"rata numer {idx+1}. Inflacja jest na poziomie: {value:.4}% ", "yellow"))
         print(f"Twoja pozostała kwota kredytu to {(round(credit_new_value, 2))} PLN, to {difference_value:.2f} PLN mniej niż w poprzednim miesiącu.")
         print(colored(("-" * 100), "blue"))
     print("")
