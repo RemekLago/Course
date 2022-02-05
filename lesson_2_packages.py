@@ -3,7 +3,8 @@ from termcolor import colored
 
 weight_max = 20
 number_of_elements_to_pack = 15
-# creating list of packages weight, possible are value from 1 to 10 kg
+# creating list of packages weight, possible are value from 1 to 10 kg,
+# (0 = break)
 list_of_weight = [i for i in range(0, 11)]
 # creating list of random packages with its weight
 list_of_packages_to_send = random.choices(list_of_weight, k=number_of_elements_to_pack)
@@ -53,10 +54,9 @@ def final_information(number):
     number_of_empty_kilos = number_of_sent_packages * 20 - number_of_kilograms_sent
     number_of_package_with_max_empty_weight = 20 - min([sum(final[i]) for i in range(len(final))])
     list_helper = [sum(final[i]) for i in range(len(final))]
-    print(list_helper)
+    print(f"Sum in each package: {list_helper}")
 #    print(min(list_helper))
     package_with_max_empty_weight = list_helper.index(min(list_helper)) + 1
-#    package_with_max_empty_weight = final.count(min(list_helper))
 
 
     print(colored(f"Number of packages to send:\n {number_of_sent_packages}", "blue"))
