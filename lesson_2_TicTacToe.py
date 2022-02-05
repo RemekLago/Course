@@ -89,6 +89,9 @@ def check_if_win(list_board):
 
 def game():
     x = printing_board(list_board_create())
-    y = computer_move(x)
-    human_move(y)
+    for i in range (1, 10):
+        y = computer_move(x)
+        check_if_win(y)
+        human_move(y)
+        check_if_win(y)
 game()
