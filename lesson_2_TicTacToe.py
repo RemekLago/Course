@@ -41,11 +41,11 @@ def computer_move(list_board):
     if list_board[y] == "-":
         list_board[y] = "X"
     elif list_board[y] == "X" or list_board[y] == "O":
-            y = random.choice(1, 10)
-            while list_board[y] == "X" or list_board[y+1] == "O":
-                y = random.choice(1, 10)
-                if list_board[y+1] == "-":
-                    list_board[y] = "X"
+        y = random.choice([i for i in range(1, 10)])
+        while list_board[y] == "X" or list_board[y] == "O":
+            y = random.choice([i for i in range(1, 10)])
+            if list_board[y] == "-":
+                list_board[y] = "X"
 
     print(f"Computer chose: {y}")
     print(f"The actual list of board: {list_board[1:10]}")
@@ -73,17 +73,20 @@ def check_if_win(list_board):
     for i, j in enumerate(options):
         if list_board[options[i][0]] == list_board[options[i][1]] == list_board[options[i][2]] != "-":
             if list_board[options[i][0]] == "X":
-                win = "X"
+                win = "Computer won"
                 print(f"Win: {win}")
                 return win
+                break
             elif list_board[options[i][0]] == "O":
-                win = "O"
+                win = "Human won"
                 print(f"Win: {win}")
                 return win
+                break
             elif "-" not in list_board:
                 win = "R"
                 print(f"Win: {win}")
                 return win
+                break
             else:
                 continue
 
