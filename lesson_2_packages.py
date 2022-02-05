@@ -16,14 +16,19 @@ def adding_packages(number):
     weight_send = 0
     value = list_of_packages_to_send
     for i in range(number, len(value)):
-        if weight_send + value[i] <= weight_max:
-            weight_package = value[i]
-            weight_send += weight_package
-#           print(weight_send)
-            list_send.append(value[i])
-            round = i
+        if value[i] > 0:
+            if weight_send + value[i] <= weight_max:
+                    weight_package = value[i]
+                    weight_send += weight_package
+        #           print(weight_send)
+                    list_send.append(value[i])
+                    round = i
+            else:
+                break
         else:
+            round = len(value)
             break
+
     print(f"List_send: {list_send} , ID: {round}")
     return list_send, round + 1
 #adding_packages(0)
@@ -54,9 +59,10 @@ def final_information(number):
 #    package_with_max_empty_weight = final.count(min(list_helper))
 
 
-    print(colored(f"Number of packages to send: {number_of_sent_packages}", "blue"))
-    print(colored(f"Number of kilograms to send: {number_of_kilograms_sent}", "blue"))
-    print(colored(f"Amount of empty kilograms in all packages: {number_of_empty_kilos}", "blue"))
-    print(colored(f"Number of package with the biggest amount of empty kilograms: {package_with_max_empty_weight} and it was {number_of_package_with_max_empty_weight} kg", "blue"))
+    print(colored(f"Number of packages to send:\n {number_of_sent_packages}", "blue"))
+    print(colored(f"Number of kilograms to send:\n {number_of_kilograms_sent}", "blue"))
+    print(colored(f"Amount of empty kilograms in all packages:\n {number_of_empty_kilos}", "blue"))
+    print(colored(f"Number of package with the biggest amount of empty kilograms:\n"
+                  f" {package_with_max_empty_weight} and it was {number_of_package_with_max_empty_weight} kg", "blue"))
 
 final_information(0)
