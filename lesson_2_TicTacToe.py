@@ -90,6 +90,7 @@ def check_if_win(list_board):
             else:
                 continue
 
+# unfinished
 def game():
     x = printing_board(list_board_create())
     for i in range(1, 10):

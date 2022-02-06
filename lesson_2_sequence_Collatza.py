@@ -8,8 +8,8 @@ X może przyjmować wartości od 1 do 100. """
 
 import matplotlib.pyplot as plt
 
-start_number = 90   # start_number = input(int("Please enter your number from 1 to 100: "))
-
+# start_number = input(int("Please enter your number from 1 to 100: "))
+start_number = 90
 
 def sequence(start_number):
     list = []
