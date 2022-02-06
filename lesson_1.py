@@ -27,7 +27,8 @@ def calculation(credit1, loan_installment2, interest_rate1):
     inflation2 = import_data()
 #   for i in range(len(inflation2)):
     for idx, value in enumerate(inflation2):
-        credit_new_value = ((1 + value / 100 + interest_rate1)/(12)) * credit1 - loan_installment2  # obliczanie nowej wartości kredytu po racie
+        oprocentowanie = 1 + ((value/100 + interest_rate1)/12)
+        credit_new_value = (1 + ((value / 100 + interest_rate1)/12)) * credit1 - loan_installment2                                         # obliczanie nowej wartości kredytu po racie
         difference_value = credit1 - credit_new_value                                                    # obliczanie różnicy między starą wartością kredytu a nową
         credit1 = credit_new_value
 
