@@ -4,8 +4,8 @@ from termcolor import colored
 weight_max = 20
 number_of_elements_to_pack = 15
 # creating list of packages weight, possible are value from 1 to 10 kg,
-# (0 = break)
-list_of_weight = [i for i in range(0, 11)]
+# (0 = break or more than 10 = break)
+list_of_weight = [i for i in range(0, 12)]
 # creating list of random packages with its weight
 list_of_packages_to_send = random.choices(list_of_weight, k=number_of_elements_to_pack)
 print(colored(f"List of packages to pack with its weight (kg):\n{list_of_packages_to_send}\n", "yellow"))
@@ -17,7 +17,7 @@ def adding_packages(number):
     weight_send = 0
     value = list_of_packages_to_send
     for i in range(number, len(value)):
-        if value[i] > 0:
+        if value[i] > 0 and value[i] <= 10:
             if weight_send + value[i] <= weight_max:
                     weight_package = value[i]
                     weight_send += weight_package
