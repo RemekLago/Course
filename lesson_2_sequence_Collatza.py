@@ -17,13 +17,11 @@ def sequence(start_number):
     while number > 1:
         if number % 2 == 0:
             list.append(number)
-            next_number = number / 2
-            number = next_number
+            number = number / 2
             i += 1
         else:
             list.append(number)
-            next_number = 3 * number + 1
-            number = next_number
+            number = 3 * number + 1
             i += 1
     print(list)
     print(f"Sequence was done in {i} steps.")
@@ -33,10 +31,7 @@ def sequence(start_number):
 # simple plot of sequence value versus number of iterations
 def plot_of_sequence():
     result = sequence(start_number)
-    y = []
-    for id in result:
-        y.append(id)
-    plt.plot(y)
+    plt.plot(result)
     plt.show()
 
 plot_of_sequence()

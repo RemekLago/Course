@@ -57,7 +57,8 @@ def human_move(list_board):
     if list_board[x] == "-":
         list_board[x] = "O"
     elif list_board[x] == "X" or list_board[x] == "O":
-        print("Please choose another number")
+        print("you have chose existed number, choose other.")
+        x = int(input("Please enter your move, choose number (1-9): "))
     else:
         print("Please choose correct number (1-9)")
 
@@ -93,7 +94,7 @@ def check_if_win(list_board):
 # unfinished, to verification
 def game():
     x = printing_board(list_board_create())
-    for i in range(1, 10):
+    for i in range(1, 12):
         y = computer_move(x)
         check_if_win(y)
         human_move(y)
