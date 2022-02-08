@@ -15,14 +15,12 @@ def sequence(start_number):
     i = 0
     number = start_number
     while number > 1:
+        list.append(number)
+        i += 1
         if number % 2 == 0:
-            list.append(number)
             number = number / 2
-            i += 1
         else:
-            list.append(number)
             number = 3 * number + 1
-            i += 1
     print(list)
     print(f"Sequence was done in {i} steps.")
     return list
