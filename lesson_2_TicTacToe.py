@@ -36,7 +36,6 @@ def printing_board(list_board):
     print(colored((" --- --- ---"), "yellow"))
     return list_board
 
-
 def computer_move(list_board):
     y = random.choice([i for i in range(1, 10)])
     if list_board[y] == "-":
@@ -51,6 +50,13 @@ def computer_move(list_board):
 #        if list_board[y] == "-":
 #                list_board[y] = "X"
 
+        y = random.choice([i for i in range(1, 10)])
+        while list_board[y] == "X" or list_board[y] == "O":
+            y = random.choice([i for i in range(1, 10)])
+            if list_board[y] == "-":
+                list_board[y] = "X"
+
+
     print(f"Computer chose: {y}")
     print(f"The actual list of board: {list_board[1:10]}")
     printing_board(list_board)
@@ -62,8 +68,11 @@ def human_move(list_board):
     if list_board[x] == "-":
         list_board[x] = "O"
     elif list_board[x] == "X" or list_board[x] == "O":
+
         print("you have chose existed number, choose other.")
         human_move(list_board)
+        print("Please choose another number")
+
     else:
         print("Please choose correct number (1-9)")
 
@@ -95,15 +104,16 @@ def check_if_win(list_board):
                 print(f"Win: {win}")
                 w = 1
                 return w
+            continue
 
-            else:
-                continue
 
 # unfinished, to verification
 def game():
     x = printing_board(list_board_create())
     w = 0
     while w == 0:
+
+    for i in range(1, 10):
         y = computer_move(x)
         check_if_win(y)
         human_move(y)
