@@ -21,7 +21,6 @@ def adding_packages(number):
             if weight_send + value[i] <= weight_max:
                     weight_package = value[i]
                     weight_send += weight_package
-        #           print(weight_send)
                     list_send.append(value[i])
                     round = i
             else:
@@ -32,7 +31,6 @@ def adding_packages(number):
 
     print(f"List_send: {list_send} , ID: {round}")
     return list_send, round + 1
-#adding_packages(0)
 
 # function takes function (adding_packages) and does a loop till all packages will packed
 # function create list of lists
@@ -55,7 +53,6 @@ def final_information(number):
     number_of_package_with_max_empty_weight = 20 - min([sum(final[i]) for i in range(len(final))])
     list_helper = [sum(final[i]) for i in range(len(final))]
     print(f"Sum in each package: {list_helper}")
-#    print(min(list_helper))
     package_with_max_empty_weight = list_helper.index(min(list_helper)) + 1
 
 
