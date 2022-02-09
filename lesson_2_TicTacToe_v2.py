@@ -43,7 +43,11 @@ def computer_move(list_board):
     for idx, place in enumerate(list_board):
         if place == "-":
             list_of_available_places.append(idx)
+
+    bc = the_best_choice(list_of_available_places)
+    list_of_available_places = bc
     y = random.choice(list_of_available_places)
+    print(f"y z random_choice {y}")
     if list_board[y] == "-":
         list_board[y] = "X"
     print(f"Computer chose: {y}")
@@ -51,6 +55,58 @@ def computer_move(list_board):
     printing_board(list_board)
     return list_board
 
+
+def the_best_choice(list_of_available_places):
+    best_choice = list_of_available_places
+    print(best_choice)
+    y = random.randrange(0, len(best_choice))
+    print(y)
+    print(best_choice[y])
+    list = []
+    if best_choice[y] == best_choice[1]:
+        list = [2, 3, 4, 7, 5, 9]
+        for i, j in enumerate(list):
+            if j != "-":
+                if j in best_choice:
+                    best_choice.remove(j)
+        return best_choice
+    if best_choice[y] == best_choice[2]:
+        list = [1, 3, 5, 8]
+        for i, j in enumerate(list):
+            if j != "-":
+                if j in best_choice:
+                    best_choice.remove(j)
+        return best_choice
+    if best_choice[y] == best_choice[3]:
+        list = [1, 2, 5, 7, 6, 9]
+        for i, j in enumerate(list):
+            if j != "-":
+                if j in best_choice:
+                    best_choice.remove(j)
+        return best_choice
+    if best_choice[y] == best_choice[4]:
+        list = [1, 7, 5, 6]
+        for i, j in enumerate(list):
+            if j != "-":
+                if j in best_choice:
+                    best_choice.remove(j)
+        return best_choice
+    if best_choice[y] == best_choice[5]:
+        list = [1, 2, 3, 4, 6, 7, 8, 9]
+        for i, j in enumerate(list):
+            if j != "-":
+                if j in best_choice:
+                    best_choice.remove(j)
+        return best_choice
+    if best_choice[y] == best_choice[6]:
+        list = [3, 9, 5, 6]
+        for i, j in enumerate(list):
+            if j != "-":
+                if j in best_choice:
+                    best_choice.remove(j)
+        return best_choice
+    print(list)
+    return best_choice
 
 def human_move(list_board):
     x = int(input("Please enter your move, choose number (1-9): "))
