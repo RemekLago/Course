@@ -45,11 +45,12 @@ def computer_move(list_board):
             list_of_available_places.append(idx)
 
     bc = the_best_choice(list_of_available_places)
-    list_of_available_places = bc
-    y = random.choice(list_of_available_places)
-    print(f"y z random_choice {y}")
-    if list_board[y] == "-":
-        list_board[y] = "X"
+#    list_of_available_places = bc
+    print(f"BC = {bc}")
+    y = random.choice(bc)
+    print(f"y(index) z BC:{y}")
+    if list_board[y+1] == "-":
+        list_board[y+1] = "X"
     print(f"Computer chose: {y}")
     print(f"The actual list of board: {list_board[1:10]}")
     printing_board(list_board)
@@ -58,52 +59,82 @@ def computer_move(list_board):
 
 def the_best_choice(list_of_available_places):
     best_choice = list_of_available_places
-    print(best_choice)
-    y = random.randrange(0, len(best_choice))
-    print(y)
-    print(best_choice[y])
+    print(f"Best_choice = {best_choice}")
+    z = random.randrange(0, len(best_choice))
+    print(f"losowy index z z listy = {z}")
+    print(f"wartość indexu z = {best_choice[z]}")
     list = []
-    if best_choice[y] == best_choice[1]:
-        list = [2, 3, 4, 7, 5, 9]
-        for i, j in enumerate(list):
-            if j != "-":
-                if j in best_choice:
-                    best_choice.remove(j)
+    if best_choice[z] == best_choice[0]:
+        list = [1, 2, 3, 6, 4, 8]
+#        for i, j in enumerate(list):
+#            if j != "-":
+#                if j in best_choice:
+#                    best_choice.remove(j)
+        best_choice = list
         return best_choice
-    if best_choice[y] == best_choice[2]:
-        list = [1, 3, 5, 8]
-        for i, j in enumerate(list):
-            if j != "-":
-                if j in best_choice:
-                    best_choice.remove(j)
+    if best_choice[z] == best_choice[1]:
+        list = [0, 2, 4, 7]
+        # for i, j in enumerate(list):
+        #     if j != "-":
+        #         if j in best_choice:
+#                    best_choice.remove(j)
+        best_choice = list
         return best_choice
-    if best_choice[y] == best_choice[3]:
-        list = [1, 2, 5, 7, 6, 9]
-        for i, j in enumerate(list):
-            if j != "-":
-                if j in best_choice:
-                    best_choice.remove(j)
+    if best_choice[z] == best_choice[2]:
+        list = [0, 1, 5, 8, 4, 6]
+        # for i, j in enumerate(list):
+        #     if j != "-":
+        #         if j in best_choice:
+        #             best_choice.remove(j)
+        best_choice = list
         return best_choice
-    if best_choice[y] == best_choice[4]:
-        list = [1, 7, 5, 6]
-        for i, j in enumerate(list):
-            if j != "-":
-                if j in best_choice:
-                    best_choice.remove(j)
+    if best_choice[z] == best_choice[3]:
+        list = [0, 6, 4, 5]
+        # for i, j in enumerate(list):
+        #     if j != "-":
+        #         if j in best_choice:
+        #             best_choice.remove(j)
+        best_choice = list
         return best_choice
-    if best_choice[y] == best_choice[5]:
-        list = [1, 2, 3, 4, 6, 7, 8, 9]
-        for i, j in enumerate(list):
-            if j != "-":
-                if j in best_choice:
-                    best_choice.remove(j)
+    if best_choice[z] == best_choice[4]:
+        list = [3, 5, 1, 7, 0, 8]
+        # for i, j in enumerate(list):
+        #     if j != "-":
+        #         if j in best_choice:
+        #             best_choice.remove(j)
+        best_choice = list
         return best_choice
-    if best_choice[y] == best_choice[6]:
-        list = [3, 9, 5, 6]
-        for i, j in enumerate(list):
-            if j != "-":
-                if j in best_choice:
-                    best_choice.remove(j)
+    if best_choice[z] == best_choice[5]:
+        list = [2, 8, 3, 4]
+        # for i, j in enumerate(list):
+        #     if j != "-":
+        #         if j in best_choice:
+        #             best_choice.remove(j)
+        best_choice = list
+        return best_choice
+    if best_choice[z] == best_choice[6]:
+        list = [0, 3, 7, 8, 4, 2]
+        # for i, j in enumerate(list):
+        #     if j != "-":
+        #         if j in best_choice:
+        #             best_choice.remove(j)
+        best_choice = list
+        return best_choice
+    if best_choice[z] == best_choice[7]:
+        list = [6, 8, 1, 4]
+        # for i, j in enumerate(list):
+        #     if j != "-":
+        #         if j in best_choice:
+        #             best_choice.remove(j)
+        best_choice = list
+        return
+    if best_choice[z] == best_choice[8]:
+        list = [6, 7, 5, 2, 4, 0]
+        # for i, j in enumerate(list):
+        #     if j != "-":
+        #         if j in best_choice:
+        #             best_choice.remove(j)
+        best_choice = list
         return best_choice
     print(list)
     return best_choice
