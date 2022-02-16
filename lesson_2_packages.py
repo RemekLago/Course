@@ -5,7 +5,7 @@ weight_max = 20
 number_of_elements_to_pack = 15
 # creating list of packages weight, possible are value from 1 to 10 kg,
 # (0 = break or more than 10 = break)
-list_of_weight = [i for i in range(0, 12)]
+list_of_weight = [i for i in range(1, 11)]
 # creating list of random packages with its weight
 list_of_packages_to_send = random.choices(list_of_weight,
                                           k=number_of_elements_to_pack)
@@ -21,17 +21,17 @@ def adding_packages(number):
     for i in range(number, len(value)):
         if value[i] > 0 and value[i] <= 10:
             if weight_send + value[i] <= weight_max:
-                    weight_package = value[i]
-                    weight_send += weight_package
-                    list_send.append(value[i])
-                    round = i
+                weight_package = value[i]
+                weight_send += weight_package
+                list_send.append(value[i])
+                round_number = i
             else:
                 break
         else:
-            round = len(value)
+            round_number = len(value)
             break
-    print(f"List_send: {list_send} , ID: {round}")
-    return list_send, round + 1
+    print(f"List_send: {list_send} , ID: {round_number}")
+    return list_send, round_number + 1
 
 # function takes function (adding_packages)
 # and does a loop till all packages will packed

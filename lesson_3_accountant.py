@@ -7,9 +7,13 @@ history_account = []
 balance_start = 0
 product_dict = {}
 
-"add a task from input to the previous history updated from file in.txt"
+"""add a task from input to the previous history updated from file in.txt
+remove command stop and than add it on the end of list"""
+command_stop = ["stop"]
+command_final.remove(command_stop)
 new_command_input = sys.argv
 command_final.append(new_command_input[1:])
+command_final.append(command_stop)
 
 "loop with all 'if' and adding operation to list with history"
 for i, j in enumerate(command_final):
