@@ -7,9 +7,11 @@ history_account = []
 balance_start = 0
 product_dict = {}
 
-nowa_akcja = sys.argv
-command_final.append(nowa_akcja[1:])
+"add a task from input to the previous history updated from file in.txt"
+new_command_input = sys.argv
+command_final.append(new_command_input[1:])
 
+"loop with all 'if' and adding operation to list with history"
 for i, j in enumerate(command_final):
     data_input = command_final[i]
     if data_input[0] == "saldo":
@@ -29,7 +31,7 @@ for i, j in enumerate(command_final):
             product_dict.update({product_id: quantity})
             print(f"Zakup: {product_id} {quantity}")
             print(product_dict)
-        elif balance_start < 0:     # or balance_start < price * quantity:
+        elif balance_start < 0:     # or balance_start < price * quantity
             print("ERROR - balance lower than 0")
         elif price < 0:
             print("ERROR - price lower than 0")
@@ -68,26 +70,24 @@ for i, j in enumerate(command_final):
         history_account.append(data_input)
 
     elif data_input[0] == "stop":
-        pass
         history_account.append(data_input)
+        break
 
     else:
         print("ERROR")
         history_account.append(data_input)
 
-    print(colored(f"product_dict: {product_dict}", "yellow"))
-    print(colored(f"balance_start: {balance_start}", "yellow"))
-    print(colored(f"history_account: {history_account}", "yellow"))
-    print("-" * 100)
+"writing to file all history of accounting process"
+with open("out.txt", "w") as file:
+    for i in history_account:
+        for element in i:
+            file.write(element + "\n")
 
-for akcja in history_account:
-    for element in akcja:
-        print(element)
+#    print(colored(f"product_dict: {product_dict}", "yellow"))
+#    print(colored(f"balance_start: {balance_start}", "yellow"))
+#    print(colored(f"history_account: {history_account}", "yellow"))
+#    print("-" * 100)
 
 
-# with open("out.txt", "w") as file:
-#     for i, j in history_account:
-#         file.write('a1 ')
-#
-#     file.close()
+
 
