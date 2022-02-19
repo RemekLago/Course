@@ -11,6 +11,7 @@ for i, j in enumerate(command):
     if j == "saldo":
         list_temporary.append(command[i])
         list_temporary.append(command[i + 1])
+        list_temporary.append(command[i + 2])
         command_final.append(list_temporary)
         list_temporary = []
     elif j == "sprzedaz":

@@ -1,3 +1,9 @@
+saldo
+1000000
+wplata poczatkowa
+saldo
+-140000
+zus
 zakup
 raspberry
 15000
@@ -7,6 +13,6 @@ raspberry
 25000
 5
 saldo
-888888
-dodanie
+20000
+costam
 stop

@@ -15,9 +15,10 @@ new_command_input = sys.argv
 command_final.append(new_command_input[1:])
 command_final.append(command_stop)
 
+print(f"Command final: \n {command_final}")
+
 "loop with all 'if' and adding operation to list with history"
-for i, j in enumerate(command_final):
-    data_input = command_final[i]
+for data_input in command_final:
     if data_input[0] == "saldo":
         balance = int(data_input[1])
         comment = data_input[2]
@@ -62,16 +63,13 @@ for i, j in enumerate(command_final):
 
     elif data_input[0] == "konto":
         print(f"{balance_start}")
-        history_account.append(data_input)
 
     elif data_input[0] == "magazyn":
         for key in product_dict:
             print(f"{key} {product_dict[key]}")
-        history_account.append(data_input)
 
     elif data_input[0] == "przeglad":
         print(f"{history_account}")
-        history_account.append(data_input)
 
     elif data_input[0] == "stop":
         history_account.append(data_input)
@@ -79,7 +77,6 @@ for i, j in enumerate(command_final):
 
     else:
         print("ERROR")
-        history_account.append(data_input)
 
 "writing to file all history of accounting process"
 with open("out.txt", "w") as file:
