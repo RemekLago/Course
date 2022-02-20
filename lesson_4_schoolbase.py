@@ -142,4 +142,32 @@ def report_generating_teacher():
 #    print(list_with_results)
     return list_with_results
 
-report_generating_teacher()
+
+def report_generating_student():
+    """when input is name of student, function generate report
+    with data:names of subjects which student learners and
+    teacher's names of that subjects"""
+
+    x = "Zygmunt Krasiński"
+    var = dictionary_with_staff()
+    dict_of_students = var[0]
+    dict_of_teachers = var[1]
+    list_with_results = []
+    set_with_results = set()
+
+    for value in dict_of_students.values():
+        if x in value["imie_nazwisko"]:
+            list_with_results.append(value["imie_nazwisko"])
+            y = value["klasa"]
+            print(y)
+    for value in dict_of_teachers.values():
+        if value["status"] == "nauczyciel":
+            for idx in value["klasa"]:
+                if idx in y:
+                    list_with_results.append(value["przedmiot"])
+                    list_with_results.append(value["imie_nazwisko"])
+
+    print(list_with_results)
+    return list_with_results
+
+report_generating_student()
