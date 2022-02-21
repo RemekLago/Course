@@ -1,5 +1,5 @@
 from pprint import pprint
-
+import sys
 
 def open_file_with_history():
     """open file to import history of school base
@@ -15,7 +15,6 @@ def open_file_with_history():
     for idx, idy in enumerate(command_input_history):
         if idy == "uczen":
             command_input_history.insert(idx+3, "")
-#    pprint(command_input_history)
 
     for idx in command_input_history:
         if idx != "":
@@ -25,7 +24,6 @@ def open_file_with_history():
             list_temporary = []
         elif idx == "koniec":
             break
-#    pprint(command_input_final)
     return command_input_final
 
 
@@ -59,7 +57,8 @@ tutors = []
 
 
 def create_list_of_students():
-    for idx, idy in enumerate(data):
+    """create a list of students"""
+    for idy in data:
         if idy[0] == "uczen":
             person = Student(idy[0], idy[1], idy[2])
             students.append(person)
@@ -71,7 +70,8 @@ def create_list_of_students():
 
 
 def create_list_of_teachers():
-    for idx, idy in enumerate(data):
+    """create a list of teachers"""
+    for idy in data:
         if idy[0] == "nauczyciel":
             status = idy[0]
             imie = idy[1]
@@ -87,7 +87,8 @@ def create_list_of_teachers():
 
 
 def create_list_of_tutors():
-    for idx, idy in enumerate(data):
+    """create a list of tutors"""
+    for idy in data:
         if idy[0] == "wychowawca":
             status = idy[0]
             imie = idy[1]
@@ -107,3 +108,8 @@ def create_list_of_tutors():
 
 
 
+
+# with open("output_lesson_4_schoolbase_class.txt", "w") as file:
+#     i = take_input_and_report()
+#     for element in i:
+#         file.write(element + "\n")
