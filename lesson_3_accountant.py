@@ -41,8 +41,6 @@ for data_input in command_final:
                 product_dict[product_id] = product_dict[product_id] + quantity
             elif not product_dict.get(f"{product_id}"):
                 product_dict.update({product_id: quantity})
-#                print(f"Zakup: {product_id} {quantity}")
-#                print(product_dict)
             history_account.append(data_input)
 
     elif data_input[0] == "sprzedaz":
@@ -59,8 +57,6 @@ for data_input in command_final:
         elif product_dict.get(f"{product_id}") >= quantity:
             product_dict[product_id] -= quantity
         history_account.append(data_input)
-#        print(f"Sprzedaz: {product_id} {product_dict[product_id]}")
-#        print(product_dict)
 
     elif data_input[0] == "konto":
         print(f"{balance_start}")
