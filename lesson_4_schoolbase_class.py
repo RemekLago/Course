@@ -51,65 +51,162 @@ class Tutor:
 
 
 data = open_file_with_history()
-students = []
-teachers = []
-tutors = []
+#students = []
+#teachers = []
+#tutors = []
+students = {}
+teachers = {}
+tutors = {}
 
-
-def create_list_of_students():
-    """create a list of students"""
+def create_dict_of_students():
+    """create a dictionary of students"""
     for idy in data:
         if idy[0] == "uczen":
             person = Student(idy[0], idy[1], idy[2])
-            students.append(person)
+            students.update({person.imie: {"status": person.status, "klasa": person.klasa}})
             continue
         else:
             continue
-    print("zrobione")
+#    print(students)
     return students
 
 
-def create_list_of_teachers():
-    """create a list of teachers"""
+def create_dict_of_teachers():
+    """create a dict of teachers"""
     for idy in data:
         if idy[0] == "nauczyciel":
             status = idy[0]
             imie = idy[1]
             przedmiot = idy[2]
-            klasa = idy[3]
+            list_class = [j for i, j in enumerate(idy) if i >= 3]
+            klasa = list_class
             person = Teacher(status, imie, przedmiot, klasa)
-            teachers.append(person)
+            teachers.update({person.imie: {"status": person.status, "klasa": person.klasa, "przedmiot": person.przedmiot}})
             continue
         else:
             continue
-    print("zrobione")
+#    print(teachers)
     return teachers
 
 
-def create_list_of_tutors():
-    """create a list of tutors"""
+def create_dict_of_tutors():
+    """create a dict of tutors"""
     for idy in data:
         if idy[0] == "wychowawca":
             status = idy[0]
             imie = idy[1]
-            klasa = idy[2]
+            list_class = [j for i, j in enumerate(idy) if i >= 2]
+            klasa = list_class
             person = Tutor(status, imie, klasa)
-            tutors.append(person)
+            tutors.update({person.imie: {"status": person.status, "klasa": person.klasa}})
             continue
         else:
             continue
-    print("zrobione")
+#    print(tutors)
     return tutors
 
 
+def merge_dictionaries():
+    """merge all dictionaries to one for better searching in next steps"""
+    d1 = create_dict_of_students()
+    d2 = create_dict_of_teachers()
+    d3 = create_dict_of_tutors()
+
+    dictionary_all = d1 | d2 | d3
+#    print(dictionary_all)
+    return dictionary_all
 
 
+def searching_result_for_command():
+    """ """
+    data_history = merge_dictionaries()
+#    print(data_history)
+    x = sys.argv
+    data_input = x[1:][0]
+    result = []
+
+    for key, value in data_history.items():
+        if data_input in value["klasa"] and value["status"] == "wychowawca":
+            result.append(key)
+            names_classes = value["klasa"]
+            for key1, value1 in data_history.items():
+                if value1["klasa"] in names_classes:
+                    result.append(key1)
+        if data_input in key and value["status"] == "wychowawca":
+            result.append(key)
+            names_classes = value["klasa"]
+            for key1, value1 in data_history.items():
+                if value1["klasa"] in names_classes:
+                    result.append(key1)
+
+        if data_input in key and value["status"] == "nauczyciel":
+            result.append(key)
+            names_classes = value["klasa"]
+            for key1, value1 in data_history.items():
+                for i in value1["klasa"]:
+                    if i in names_classes and value1["status"] == "wychowawca":
+                        result.append(key1)     #ustawić set bo elelemnty się powtarzają
+
+        if data_input in key and value["status"] == "uczen":
+            result.append(key)
+            names_classes = value["klasa"]
+            for key1, value1 in data_history.items():
+                if names_classes in value1["klasa"] and value1["status"] == "nauczyciel":
+                    result.append(key1)
+                    result.append(value1["przedmiot"])
+#    pprint(result)
+    return result
 
 
+with open("output_lesson_4_schoolbase_class.txt", "w") as file:
+    i = searching_result_for_command()
+    for element in i:
+        file.write(element + "\n")
 
 
+# def create_list_of_students():
+#     """create a list of students"""
+#     for idy in data:
+#         if idy[0] == "uczen":
+#             person = Student(idy[0], idy[1], idy[2])
+#             students.append(person)
+#             continue
+#         else:
+#             continue
+#     print("zrobione")
+#     return students
+#
+#
+# def create_list_of_teachers():
+#     """create a list of teachers"""
+#     for idy in data:
+#         if idy[0] == "nauczyciel":
+#             status = idy[0]
+#             imie = idy[1]
+#             przedmiot = idy[2]
+#             klasa = idy[3]
+#             person = Teacher(status, imie, przedmiot, klasa)
+#             teachers.append(person)
+#             continue
+#         else:
+#             continue
+#     print("zrobione")
+#     return teachers
+#
+#
+# def create_list_of_tutors():
+#     """create a list of tutors"""
+#     for idy in data:
+#         if idy[0] == "wychowawca":
+#             status = idy[0]
+#             imie = idy[1]
+#             klasa = idy[2]
+#             person = Tutor(status, imie, klasa)
+#             tutors.append(person)
+#             continue
+#         else:
+#             continue
+#     print("zrobione")
+#     return tutors
 
-# with open("output_lesson_4_schoolbase_class.txt", "w") as file:
-#     i = take_input_and_report()
-#     for element in i:
-#         file.write(element + "\n")
+
