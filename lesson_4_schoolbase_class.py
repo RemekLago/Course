@@ -81,7 +81,9 @@ def create_dict_of_teachers():
             list_class = [j for i, j in enumerate(idy) if i >= 3]
             klasa = list_class
             person = Teacher(status, imie, przedmiot, klasa)
-            teachers.update({person.imie: {"status": person.status, "klasa": person.klasa, "przedmiot": person.przedmiot}})
+            teachers.update({person.imie: {"status": person.status,
+                                           "klasa": person.klasa,
+                                           "przedmiot": person.przedmiot}})
             continue
         else:
             continue
@@ -98,7 +100,8 @@ def create_dict_of_tutors():
             list_class = [j for i, j in enumerate(idy) if i >= 2]
             klasa = list_class
             person = Tutor(status, imie, klasa)
-            tutors.update({person.imie: {"status": person.status, "klasa": person.klasa}})
+            tutors.update({person.imie: {"status": person.status,
+                                         "klasa": person.klasa}})
             continue
         else:
             continue
@@ -145,13 +148,14 @@ def searching_result_for_command():
             for key1, value1 in data_history.items():
                 for i in value1["klasa"]:
                     if i in names_classes and value1["status"] == "wychowawca":
-                        result.append(key1)     #ustawić set bo elelemnty się powtarzają
+                        result.append(key1)
 
         if data_input in key and value["status"] == "uczen":
             result.append(key)
             names_classes = value["klasa"]
             for key1, value1 in data_history.items():
-                if names_classes in value1["klasa"] and value1["status"] == "nauczyciel":
+                if names_classes in value1["klasa"] and \
+                        value1["status"] == "nauczyciel":
                     result.append(key1)
                     result.append(value1["przedmiot"])
 #    pprint(result)
@@ -162,51 +166,5 @@ with open("output_lesson_4_schoolbase_class.txt", "w") as file:
     i = searching_result_for_command()
     for element in i:
         file.write(element + "\n")
-
-
-# def create_list_of_students():
-#     """create a list of students"""
-#     for idy in data:
-#         if idy[0] == "uczen":
-#             person = Student(idy[0], idy[1], idy[2])
-#             students.append(person)
-#             continue
-#         else:
-#             continue
-#     print("zrobione")
-#     return students
-#
-#
-# def create_list_of_teachers():
-#     """create a list of teachers"""
-#     for idy in data:
-#         if idy[0] == "nauczyciel":
-#             status = idy[0]
-#             imie = idy[1]
-#             przedmiot = idy[2]
-#             klasa = idy[3]
-#             person = Teacher(status, imie, przedmiot, klasa)
-#             teachers.append(person)
-#             continue
-#         else:
-#             continue
-#     print("zrobione")
-#     return teachers
-#
-#
-# def create_list_of_tutors():
-#     """create a list of tutors"""
-#     for idy in data:
-#         if idy[0] == "wychowawca":
-#             status = idy[0]
-#             imie = idy[1]
-#             klasa = idy[2]
-#             person = Tutor(status, imie, klasa)
-#             tutors.append(person)
-#             continue
-#         else:
-#             continue
-#     print("zrobione")
-#     return tutors
 
 
