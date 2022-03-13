@@ -97,14 +97,14 @@ def create_dict_of_tutors():
         if idy[0] == "wychowawca":
             status = idy[0]
             imie = idy[1]
-            list_class = [j for i, j in enumerate(idy) if i >= 2]
-            klasa = list_class
+            # list_class = [j for i, j in enumerate(idy) if i >= 2]
+            klasa = idy[2:]
             person = Tutor(status, imie, klasa)
             tutors.update({person.imie: {"status": person.status,
                                          "klasa": person.klasa}})
-            continue
-        else:
-            continue
+#            continue
+#        else:
+#            continue
 #    print(tutors)
     return tutors
 
@@ -124,8 +124,9 @@ def searching_result_for_command():
     """ """
     data_history = merge_dictionaries()
 #    print(data_history)
-    x = sys.argv
-    data_input = x[1:][0]
+#    x = sys.argv
+#    data_input = sys.argv[1:][0]
+    data_input = sys.argv[1]
     result = []
 
     for key, value in data_history.items():
