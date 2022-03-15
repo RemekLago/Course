@@ -12,45 +12,39 @@ def check_kind_of_input():
     command_final = []
     command = open_file()
     for i, j in enumerate(command):
-        if j == "saldo.py":
+        if j == "saldo":
+            list_temporary.append(command[i])
+            list_temporary.append(command[i + 1])
+            list_temporary.append(command[i + 2])
+            command_final.append(list_temporary)
+            list_temporary = []
+        elif j == "sprzedaz":
             list_temporary.append(command[i])
             list_temporary.append(command[i + 1])
             list_temporary.append(command[i + 2])
             list_temporary.append(command[i + 3])
             command_final.append(list_temporary)
             list_temporary = []
-        elif j == "sprzedaz.py":
+        elif j == "zakup":
             list_temporary.append(command[i])
             list_temporary.append(command[i + 1])
             list_temporary.append(command[i + 2])
             list_temporary.append(command[i + 3])
-            list_temporary.append(command[i + 4])
             command_final.append(list_temporary)
             list_temporary = []
-        elif j == "zakup.py":
+        elif j == "konto":
+            list_temporary.append(command[i])
+            command_final.append(list_temporary)
+            list_temporary = []
+        elif j == "magazyn":
             list_temporary.append(command[i])
             list_temporary.append(command[i + 1])
             list_temporary.append(command[i + 2])
             list_temporary.append(command[i + 3])
-            list_temporary.append(command[i + 4])
             command_final.append(list_temporary)
             list_temporary = []
-        elif j == "konto.py":
+        elif j == "przeglad":
             list_temporary.append(command[i])
-            list_temporary.append(command[i + 1])
-            command_final.append(list_temporary)
-            list_temporary = []
-        elif j == "magazyn.py":
-            list_temporary.append(command[i])
-            list_temporary.append(command[i + 1])
-            list_temporary.append(command[i + 2])
-            list_temporary.append(command[i + 3])
-            list_temporary.append(command[i + 4])
-            command_final.append(list_temporary)
-            list_temporary = []
-        elif j == "przeglad.py":
-            list_temporary.append(command[i])
-            list_temporary.append(command[i + 1])
             command_final.append(list_temporary)
             list_temporary = []
         elif j == "stop":
