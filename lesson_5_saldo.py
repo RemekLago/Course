@@ -1,6 +1,4 @@
-from lesson_3_accountant_upgrade import running_process
-
-data = running_process()
+from lesson_3_accountant_upgrade import history_account as data
 
 
 class DataAccountant:
@@ -9,22 +7,20 @@ class DataAccountant:
         self.balance = balance
         self.comment = comment
 
-    def writing_to_file(self, record, filename):
-        with open(filename, "a") as file:
-            file.write(record.saldo + "\n")
-            file.write(record.balance + "\n")
-            file.write(record.comment + "\n")
 
-
-def writing_data(input_data, filename):
-    # input_data = data
+def writing_data():
+    input_data = data
     for idx in input_data:
-        if idx[0] == "saldo":
-            command = DataAccountant(idx[0], idx[1], idx[2])
-            command.writing_to_file(command, filename)
+        if idx[0] == "saldo.py":
+            record = DataAccountant(idx[1], idx[2], idx[3])
+            with open("out_saldo.txt", "a") as file:
+                file.write(record.saldo + "\n")
+                file.write(record.balance + "\n")
+                file.write(record.comment + "\n")
 
-nazwa_pliku = sys.argv[1]
-writing_data(data, nazwa_pliku)
+
+print(data)
+writing_data()
 
 
 
