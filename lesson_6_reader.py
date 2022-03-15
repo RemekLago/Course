@@ -5,7 +5,7 @@ import pickle
 import sys
 
 # x = sys.argv
-x = ["TestDict/bazatest.csv", "TestDict/TestDict5/bazatest2.csv", 1, 2, 6]
+x = ["TestDict/bazatest.csv", "TestDict/TestDict5/bazatest4.csv", 1, 1, 6]
 
 
 class InputData:
@@ -31,8 +31,9 @@ class InputData:
     def file_json_read_write(self, src, dst, change1, change2, value):
         with open(src, "r") as file:
             list_json = json.load(file)
+            print(list_json)
             list_json[change1][change2] = value
-
+            print(list_json)
         with open(dst, "w") as file:
             json.dump(list_json, file)
 
@@ -59,7 +60,6 @@ def type_of_input_file():
         type_file = "csv"
     elif file[1].endswith(".pickle"):
         type_file = "pickle"
-    # print(type_file)
     else:
         print("ERROR, given file extension isn't json, csv or pickle")
     input_command.type = type_file
@@ -77,18 +77,20 @@ def is_source_path_exist():
 def is_destination_path_exist():
     path_folder = os.path.split(input_command.dst)
     path = os.path.exists(path_folder[0])
-
     if not path:
         os.makedirs(path_folder[0])
 
 
 def final():
-    is_source_path_exist()
+    y = is_source_path_exist()
     is_destination_path_exist()
     type_input = type_of_input_file()
-    if type_input == "csv":
-        input_command.file_csv_read_write()
+    if type_input == "csv" and y == True:
+        input_command.file_csv_read_write(x[0], x[1], x[2], x[3], x[4])
     elif type_input == "json":
-        input_command.file_json_read_write()
+        input_command.file_json_read_write(x[0], x[1], x[2], x[3], x[4])
     elif type_input == "pickle":
-        input_command.file_pickle_read_write()
+        input_command.file_pickle_read_write(x[0], x[1], x[2], x[3], x[4])
+
+
+final()
