@@ -5,7 +5,7 @@ import pickle
 import sys
 
 # x = sys.argv
-x = ["TestDict/TestDict2/testfile3.csv", "TestDict/TestDict4/", 1, 2]
+x = ["TestDict/bazatest.csv", "TestDict/TestDict5/bazatest2.csv", 1, 2, 6]
 
 
 class InputData:
@@ -16,7 +16,6 @@ class InputData:
         self.change2 = change2
         self.value = value
         self.type = type
-
 
     def file_csv_read_write(self, src, dst, change1, change2, value):
         list_csv = []
@@ -29,34 +28,24 @@ class InputData:
             writer = csv.writer(file)
             writer.writerows(list_csv)
 
-
     def file_json_read_write(self, src, dst, change1, change2, value):
-        list_json = []
         with open(src, "r") as file:
-            reader = json.loads(file)
-            for row in reader:
-                list_json.append(row)
-        list_json[change1][change2] = value
+            list_json = json.load(file)
+            list_json[change1][change2] = value
 
         with open(dst, "w") as file:
-            writer = json.dumps(file)
-            writer.writerows(list_json)
-
+            json.dump(list_json, file)
 
     def file_pickle_read_write(self, src, dst, change1, change2, value):
-        list_pickle = []
         with open(src, "rb") as file:
-            reader = pickle.loads(file)
-            for row in reader:
-                list_pickle.append(row)
-        list_pickle[change1][change2] = value
+            list_pickle = pickle.load(file)
+            list_pickle[change1][change2] = value
 
         with open(dst, "wb") as file:
-            writer = pickle.dumps(file)
-            writer.writerows(list_pickle)
+            pickle.dump(list_pickle, file)
 
 
-input_command = InputData(x[0], x[1], x[2], x[3])
+input_command = InputData(x[0], x[1], x[2], x[3], x[4])
 
 
 def type_of_input_file():
@@ -86,10 +75,11 @@ def is_source_path_exist():
 
 
 def is_destination_path_exist():
-    path = os.path.exists(input_command.dst)
-    # print(path)
+    path_folder = os.path.split(input_command.dst)
+    path = os.path.exists(path_folder[0])
+
     if not path:
-        os.makedirs(input_command.dst)
+        os.makedirs(path_folder[0])
 
 
 def final():
@@ -102,7 +92,3 @@ def final():
         input_command.file_json_read_write()
     elif type_input == "pickle":
         input_command.file_pickle_read_write()
-
-
-
-
