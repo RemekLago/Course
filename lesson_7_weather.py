@@ -7,7 +7,7 @@ import os
 https://openweathermap.org/api/one-call-api"""
 
 # x = sys.argv
-x = ["1fcc3b7ebb293bbe3db4de3086b4d39c", "2022-03-24"]
+x = ["1fcc3b7ebb293bbe3db4de3086b4d39c", "2022-03-27"]
 # x = ["000000"]
 APIkey = x[0]
 
@@ -64,7 +64,7 @@ def create_dict_with_weather():
     for idx in range(8):
         weather_date = datetime.fromtimestamp\
             (weather_data["daily"][idx]["dt"]).strftime('%Y-%m-%d')
-        weather_rain = weather_data.get('["daily"][idx]["rain"]', "no rain")
+        weather_rain = weather_data["daily"][idx].get("rain", "no rain")
         weather_day_dict[weather_date] = weather_rain
     weather_day_dict_hist.update(weather_day_dict)
     return weather_day_dict_hist
