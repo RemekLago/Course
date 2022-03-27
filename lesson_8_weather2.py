@@ -1,5 +1,5 @@
 import requests
-# from keys import APIkey
+from keys import APIkey
 from datetime import datetime, timedelta
 from pprint import pprint
 import os
@@ -8,35 +8,9 @@ import os
 https://openweathermap.org/api/one-call-api"""
 
 # x = sys.argv
-x = ["1fcc3b7ebb293bbe3db4de3086b4d39c", "2022-03-24"]
-# x = ["000000"]
+x = [APIkey, "2022-03-30"]
 APIkey = x[0]
 
-
-class WeatherForecast:
-    def __init__(self, Apikey):
-        self.Apikey = Apikey
-        self.take_data = a
-
-    def __setitem__(self, weather_date, weather_rain):
-        for _ in self.take_data:
-            self.wf[weather_date] = weather_rain
-
-    def __getitem__(self, weather_date):
-        print(wf["weather_date"])
-
-    # def items(self):
-    #     for date, weather in wf.items():
-    #         print(date, weather)
-    #
-    # def __iter__(self, weather_dict):
-    #     for data in weather_dict:
-    #         print(data)
-
-
-wf = WeatherForecast(x[0])
-wf.__setitem__()
-wf.__getitem__()
 
 def check_input():
     if len(x) > 1:
@@ -91,28 +65,44 @@ def create_dict_with_weather():
         weather_date = datetime.fromtimestamp\
             (weather_data["daily"][idx]["dt"]).strftime('%Y-%m-%d')
         weather_rain = weather_data["daily"][idx].get("rain", "no rain")
-        # wf = WeatherForecast(x[0], weather_date, weather_rain)
-        # weather_day_list_hist.append(wf)
         weather_day_dict[weather_date] = weather_rain
     weather_day_dict_hist.update(weather_day_dict)
-    # pprint(weather_day_list_hist)
     return weather_day_dict_hist
 
 
-a = create_dict_with_weather()
+class WeatherForecast:
+    def __init__(self, Apikey):
+        self.Apikey = Apikey
+        self.take_data = create_dict_with_weather()
 
-# def returning_weather():
-#     input_dict = check_input()
-#     weather_day_dict_hist = create_dict_with_weather()
-#     if input_dict.get("day", "nextday") in weather_day_dict_hist:
-#         print(f"Weather forecast for day {input_dict['day']} "
-#               f"is: {weather_day_dict_hist[input_dict['day']]}")
-#     elif input_dict.get("day", "nextday") not in weather_day_dict_hist:
-#         print(f"Weather forecast for day {input_dict['day']} "
-#               f"is: Don't known")
+    def __setitem__(self, weather_date, weather_rain):
+        self.take_data[weather_date] = weather_rain
+
+    def __getitem__(self, weather_date):
+        return self.take_data[weather_date]
+
+    def items(self):
+        for date, weather in self.take_data.items():
+            # print(f"{date}: {weather}")
+            yield date, weather
+
+    def __iter__(self):
+        for data in self.take_data:
+            yield data
 
 
-# returning_weather()
+wf = WeatherForecast(x[0])
+
+# wf[date]
+print(wf["2022-03-30"])
+
+# wf.items()
+wf.items()
+
+# wf iterator
+for date in wf:
+    print(date)
+
 
 
 
