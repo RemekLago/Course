@@ -10,7 +10,48 @@ x = ["lesson_6_reader.py", "TestDict/bazatest.csv",
 changes = [[int(idy) for idy in idx.split(",")] for idx in x[3:]]
 
 
-class CommandData:
+class FileCsv:
+    """open and save csv type file"""
+    def file_csv_read(self):
+        with open(self.src, "r") as file:
+            reader = csv.reader(file)
+            content = [row for row in reader]
+        print(content)
+        return content
+
+    def file_csv_write(self, file_with_changes):
+        with open(self.dst, "w") as file:
+            writer = csv.writer(file)
+            writer.writerows(file_with_changes)
+
+
+class FileJson:
+    """open and save json type file"""
+    def file_json_read(self):
+        with open(self.src, "r") as file:
+            content = json.load(file)
+        return content
+
+    def file_json_write(self, file_with_changes):
+        with open(self.dst, "w") as file:
+            json.dump(file_with_changes, file)
+
+
+class FilePickle:
+    """open and save pickle type file"""
+    def file_pickle_read(self):
+        with open(self.src, "rb") as file:
+            content = pickle.load(file)
+        return content
+
+    def file_pickle_write(self, file_with_changes):
+        with open(self.dst, "wb") as file:
+            pickle.dump(file_with_changes, file)
+
+
+class CommandData(FileCsv, FileJson, FilePickle):
+    """check the start and finish folders exists, make the changes
+    in file and print results"""
     def __init__(self, src, dst, changes):
         self.src = src
         self.dst = dst
@@ -18,47 +59,9 @@ class CommandData:
         self.input_type = self.type_of_file(src)
         self.output_type = self.type_of_file(dst)
         self.source_path_exist = self.is_source_path_exist()
-        self.destination_path_exist = self.is_destination_path_exist()
+        self.is_destination_path_exist()
 
-    def file_csv_read(self):
-        with open(self.src, "r") as file:
-            reader = csv.reader(file)
-            content = [row for row in reader]
-        return content
-
-    def file_json_read(self):
-        with open(self.src, "r") as file:
-            content = json.load(file)
-        return content
-
-    def file_pickle_read(self):
-        with open(self.src, "rb") as file:
-            content = pickle.load(file)
-        return content
-
-    def changes_in_file(self, file_to_edit):
-        for idx in self.changes:
-            file_to_edit[idx[0]][idx[1]] = idx[2]
-        return file_to_edit
-
-    def print_changes(self, file):
-        for _ in file:
-            print(_)
-
-    def file_csv_write(self, file_with_changes):
-        with open(self.dst, "w") as file:
-            writer = csv.writer(file)
-            writer.writerows(file_with_changes)
-
-    def file_json_write(self, file_with_changes):
-        with open(self.dst, "w") as file:
-            json.dump(file_with_changes, file)
-
-    def file_pickle_write(self, file_with_changes):
-        with open(self.dst, "wb") as file:
-            pickle.dump(file_with_changes, file)
-
-    def type_of_file(self, path):
+    def type_of_file(self, path) -> str:
         type_file = None
         if path.endswith(".json"):
             type_file = "json"
@@ -82,6 +85,15 @@ class CommandData:
         path = os.path.exists(path_folder[0])
         if not path:
             os.makedirs(path_folder[0])
+
+    def changes_in_file(self, file_to_edit):
+        for idx in self.changes:
+            file_to_edit[idx[0]][idx[1]] = idx[2]
+        return file_to_edit
+
+    def print_changes(self, file):
+        for _ in file:
+            print(_)
 
     def process(self):
         self.is_source_path_exist()
