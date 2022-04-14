@@ -52,7 +52,3 @@ def check_kind_of_input():
             command_final.append(list_temporary)
             list_temporary = []
     return command_final
-
-
-
-
