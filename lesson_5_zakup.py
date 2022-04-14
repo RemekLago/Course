@@ -15,7 +15,7 @@ def writing_data():
     input_data = data
     for idx in input_data:
         if idx[0] == "zakup":
-            record = DataAccountant(idx[1], idx[2], idx[3], idx[4])
+            record = DataAccountant(idx[0], idx[1], idx[2], idx[3])
             with open(f'{command_output_file}', "a") as file:
                 file.write(record.zakup + "\n")
                 file.write(record.product_id + "\n")
