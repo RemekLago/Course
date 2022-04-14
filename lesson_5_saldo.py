@@ -2,7 +2,6 @@ from lesson_5_accountant_upgrade import history_account as data
 from lesson_5_accountant_upgrade import command_output_file \
     as command_output_file
 
-
 class DataAccountant:
     def __init__(self, saldo, balance, comment):
         self.saldo = saldo
