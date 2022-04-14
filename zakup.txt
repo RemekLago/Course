@@ -8,5 +8,11 @@ saldo
 90900
 dotacja2
 saldo
-5555
-wplata
+1000000
+wplata poczatkowa
+saldo
+-140000
+zus
+saldo
+90900
+dotacja2
