@@ -1,11 +1,12 @@
 import sys
-from input_accountant import command_final as command_final
+from input_5_accountant_upgrade import check_kind_of_input as command_final
 
 history_account = []
 balance_start = 0
 product_dict = {}
+command_final = command_final()
 
-"""add a task from input to the previous history updated from file in.txt
+"""add a task from input to the previous history updated from file in2.txt
 remove command stop and than add it on the end of list"""
 command_stop = ["stop"]
 command_final.remove(command_stop)
@@ -14,6 +15,7 @@ command_final.append(new_command_input[2:])
 command_final.append(command_stop)
 command_output_file = new_command_input[1]
 
+# print(command_final)
 
 "loop with all 'if' and adding operation to list with history"
 for data_input in command_final:
@@ -87,8 +89,8 @@ for data_input in command_final:
         history_account.append(data_input)
         break
 
-    else:
-        print("ERROR")
+    # else:
+    #     print("ERROR")
 
 # """writing to file all history of accounting process"""
 # with open("out.txt", "w") as file:
